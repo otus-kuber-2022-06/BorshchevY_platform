@@ -4,11 +4,11 @@ metadata:
   creationTimestamp: null
   labels:
     run: hipster-shop-frontend
-  name: hipster-shop-frontend
+  name: frontend
 spec:
   containers:
   - image: borshchevyn/hipster-shop-frontend:0.0.1
-    name: hipster-shop-frontend
+    name: frontend
     resources: {}
     env:
     - name: PORT
