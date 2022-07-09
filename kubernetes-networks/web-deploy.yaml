@@ -31,9 +31,7 @@ spec:
       - name: web
         image: borshchevyn/nginx-k8s-intro:1.0.0
         livenessProbe:
-          httpGet:
-            path: /index.html
-            port: 8000
+          tcpSocket: { port: 8000 }
         readinessProbe:
           httpGet:
             path: /index.html
