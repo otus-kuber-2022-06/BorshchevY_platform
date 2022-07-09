@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-prod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: app-prod
+  labels:
+    app: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:    
+      containers:
+      - image: nginxdemos/hello:0.3
+        name: app
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc-prod
+  namespace: app-prod
+spec:
+  selector:
+    app: app
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress-prod
+  namespace: app-prod
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:  
+  - host: app.lb.k8s.local
+    http: 
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: app-svc-prod
+            port: 
+              number: 80 
