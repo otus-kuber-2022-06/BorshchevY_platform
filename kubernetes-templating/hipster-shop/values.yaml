@@ -1,0 +1,18 @@
+redis:
+  auth:
+    enabled: false
+  tls:
+    authClients: false
+  architecture: standalone
+  fullnameOverride: redis-cart
+  commonLabels: { app: redis-cart }
+  master:
+    kind: Deployment
+    hostAliases[0]: redis-cart
+    persistence:
+      enabled: false
+    podLabels: { app: redis-cart }
+
+cartservice:
+  redis:
+    name: redis-cart-master

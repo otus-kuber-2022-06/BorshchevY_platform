@@ -1,0 +1,7 @@
+resources:
+- ../../base
+namespace: hipster-shop
+commonAnnotations:
+  createdBy: kustomize
+commonLabels:
+  environment: dev

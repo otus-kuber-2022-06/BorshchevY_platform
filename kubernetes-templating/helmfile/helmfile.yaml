@@ -1,0 +1,29 @@
+environments:
+  default:
+    values:
+    - charts:
+        versions:
+          nginx_ingress: 4.2.0
+          cert_manager: 1.8.2
+          harbor: 1.9.3  
+    - apps:
+      - nginx-ingress
+      - cert-manager
+      - harbor
+  dev:
+    values:
+    - charts:
+        versions:
+          nginx_ingress: 4.2.0
+          cert_manager: 1.8.2
+          harbor: 1.9.3
+    - apps:
+      - nginx-ingress
+      - cert-manager
+      - harbor
+      
+---
+bases:
+- ./releases/nginx-ingress.yaml
+- ./releases/cert-manager.yaml
+- ./releases/harbor.yaml
