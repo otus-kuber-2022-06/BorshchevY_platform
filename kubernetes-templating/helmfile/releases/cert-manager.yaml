@@ -1,0 +1,16 @@
+releases:
+  - name: cert-manager
+    labels:
+      app: cert-manager
+    namespace: cert-manager
+    createNamespace: true
+    wait: true
+    chart: jetstack/cert-manager
+    version: {{ .Values.charts.versions.cert_manager }}
+    hooks:
+    - events: ["postsync"]
+      command: releases/cert-manager-issuer.sh
+    needs:
+      - nginx-ingress/nginx-ingress
+    values:
+      - envs/{{ .Environment.Name }}/values/cert-manager.yaml

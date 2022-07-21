@@ -1,0 +1,14 @@
+releases:
+  - name: harbor
+    labels:
+      app: harbor
+    namespace: harbor
+    createNamespace: true
+    wait: true
+    chart: harbor/harbor
+    version: {{ .Values.charts.versions.harbor }}
+    needs:
+      - nginx-ingress/nginx-ingress
+      - cert-manager/cert-manager
+    values:
+      - envs/{{ .Environment.Name }}/values/harbor.yaml

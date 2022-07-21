@@ -1,0 +1,9 @@
+releases:
+  - name: nginx-ingress
+    labels:
+      app: nginx-ingress
+    namespace: nginx-ingress
+    createNamespace: true
+    wait: true
+    chart: ingress-nginx/ingress-nginx
+    version: {{ .Values.charts.versions.nginx_ingress }}

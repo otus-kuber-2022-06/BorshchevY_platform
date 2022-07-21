@@ -1,0 +1,9 @@
+resources:
+- ../../base
+- recommendationservice-prod-ns.yaml
+nameSuffix: -prod
+namespace: hipster-shop-prod
+commonAnnotations:
+  createdBy: kustomize
+commonLabels:
+  environment: prod
