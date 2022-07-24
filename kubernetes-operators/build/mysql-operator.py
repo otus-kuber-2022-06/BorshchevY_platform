@@ -26,7 +26,7 @@ def render_template(filename, vars_dict):
     return json_manifest
 
 def delete_success_jobs(mysql_instance_name):
-    print(f"start deletion {mysql_instance_name}")
+    print("start deletion")
     api = kubernetes.client.BatchV1Api()
     jobs = api.list_namespaced_job('default')
     for job in jobs.items:
