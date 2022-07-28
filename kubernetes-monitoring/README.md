@@ -5,6 +5,6 @@ BorshchevY Platform repository
 Подготовлены манифесты, для сбора метрик и развертывания nginx.  
 Развернут Prometheus сервер для сбора метрик и Grafana для визуализации.   
 Скриншот с дашборды Grafana  
-(grafana-dashboard.jpg "Nginx statistics")
+![Grafana](grafana-dashboard.jpg)
 
 
