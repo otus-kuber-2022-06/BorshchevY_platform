@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-exporter
+  name: nginx
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 3  
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:    
+      containers:
+      - name: nginx
+        imagePullPolicy: Always
+        image: borshchevyn/nginx-stats:0.1.1
+        ports:
+        - name: http
+          containerPort: 80    
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter:0.10.0
+        args:
+          - -nginx.scrape-uri=http://localhost:8080/basic_status
+        ports:
+        - name: nginx-exporter
+          containerPort: 9113
