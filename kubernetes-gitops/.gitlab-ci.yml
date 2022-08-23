@@ -1,0 +1,23 @@
+include:
+  - project: 'training-otus/pipelines'
+    file: '/docker/docker-build.yaml'
+    ref: v0.0.2
+  - local: 'src/adservice/ci.yaml'
+  - local: 'src/cartservice/ci.yaml'
+  - local: 'src/checkoutservice/ci.yaml'
+  - local: 'src/currencyservice/ci.yaml'
+  - local: 'src/emailservice/ci.yaml'
+  - local: 'src/frontend/ci.yaml'
+  - local: 'src/loadgenerator/ci.yaml'
+  - local: 'src/paymentservice/ci.yaml'
+  - local: 'src/productcatalogservice/ci.yaml'
+  - local: 'src/recommendationservice/ci.yaml'
+  - local: 'src/shippingservice/ci.yaml'
+
+variables:
+  PROJECT_NAME: hipster-shop
+ 
+stages:
+  - build
+
+  
