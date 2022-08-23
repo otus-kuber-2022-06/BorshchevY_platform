@@ -1,0 +1,6 @@
+image:
+  repository: borshchevyn/frontend
+  tag: latest
+ingress:
+  host: hipstershop.stonith.ru
+environment: develop

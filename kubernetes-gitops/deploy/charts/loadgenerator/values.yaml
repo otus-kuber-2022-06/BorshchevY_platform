@@ -1,0 +1,5 @@
+image:
+  repository: borshchevyn/loadgenerator
+  tag: latest
+ingress:
+  host: hipstershop.stonith.ru

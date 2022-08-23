@@ -1,0 +1,10 @@
+currencyservice-build:
+  stage: build
+  variables:
+    CI_REGISTRY_URL: 'docker.io'
+    DOCKER_CONTEXT_PATH: './src/currencyservice/'
+    DOCKER_REGISTRY_IMAGE_NAME: 'borshchevyn/currencyservice'
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_URL
+  extends: .docker_build
+  when: manual
