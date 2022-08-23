@@ -29,10 +29,10 @@ frontend   Promoting   0        2022-08-23T07:53:50Z
 ```
 
 `kubectl describe canary frontend -n microservices-demo`
-<details><summary>Показать лог</summary>
+```
 Events:
-  Type     Reason  Age                  From     Message
-  ----     ------  ----                 ----     -------
+  Type     Reason  Age                  From     Message  
+  ----     ------  ----                 ----     -------  
   Normal   Synced  9m1s                 flagger  New revision detected! Scaling up frontend.microservices-demo  
   Warning  Synced  8m31s                flagger  canary deployment frontend.microservices-demo not ready: waiting for rollout to finish: 0 of 1 (readyThreshold 100%) updated replicas are available  
   Normal   Synced  8m1s                 flagger  Starting canary analysis for frontend.microservices-demo  
@@ -45,4 +45,4 @@ Events:
   Normal   Synced  5m1s                 flagger  Advance frontend.microservices-demo canary weight 35  
   Warning  Synced  2m31s                flagger  frontend-primary.microservices-demo not ready: waiting for rollout to finish: 1 old replicas are pending termination  
   Normal   Synced  91s (x6 over 4m31s)  flagger  (combined from similar events): Promotion completed! Scaling down frontend.microservices-demo  
-</details>
+```
