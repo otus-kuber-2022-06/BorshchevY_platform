@@ -242,3 +242,77 @@ zbLcEab6Eq38KQlSpzFvOOLojQ+eumWosY8G+a8A3iawfbVIrA7wIAtrBdvmHAui
 private_key_type    rsa
 serial_number       7a:78:ac:b1:9f:0f:8f:a1:ac:ed:c9:bf:19:c8:06:b1:18:89:59:ba
 ```
+
+
+### Реализовать доступ к vault через https(*)
+
+Для подготовки сертификатов и секретов, а также самого helm-чарта vault-a использовал [статью](https://www.vaultproject.io/docs/platform/k8s/helm/examples/standalone-tls)
+Результат:
+
+`root@tmp:/# curl -kv https://vault.vault:8200/v1/sys/seal-status`
+```
+*   Trying 10.11.240.60:8200...
+* Connected to vault.vault (10.11.240.60) port 8200 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS header, Finished (20):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Request CERT (13):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.2 (OUT), TLS header, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.3 (OUT), TLS handshake, Certificate (11):
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: O=system:nodes; CN=system:node:vault-ui.vault.svc
+*  start date: Sep  1 10:25:44 2022 GMT
+*  expire date: Sep  1 10:25:44 2023 GMT
+*  issuer: CN=kubernetes
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* Using Stream ID: 1 (easy handle 0x55da31a60e80)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+> GET /v1/sys/seal-status HTTP/2
+> Host: vault.vault:8200
+> user-agent: curl/7.81.0
+> accept: */*
+>
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 250)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+< HTTP/2 200
+< cache-control: no-store
+< content-type: application/json
+< strict-transport-security: max-age=31536000; includeSubDomains
+< content-length: 206
+< date: Thu, 01 Sep 2022 12:07:18 GMT
+<
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{"type":"shamir","initialized":true,"sealed":true,"t":1,"n":1,"progress":0,"nonce":"","version":"1.11.2","build_date":"2022-07-29T09:48:47Z","migration":false,"recovery_seal":false,"storage_type":"consul"}
+* Connection #0 to host vault.vault left intact
+```
