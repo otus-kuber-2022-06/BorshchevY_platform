@@ -1,0 +1,5 @@
+*.bak
+kubernetes-vault/consul-helm
+kubernetes-vault/vault-guides
+kubernetes-vault/vault-helm
+
