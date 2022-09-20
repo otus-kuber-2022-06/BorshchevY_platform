@@ -2,8 +2,8 @@
 BorshchevY Platform repository
 
 ### Установка csi hostpath plugin
-Для выполнения основного ДЗ, склонируем [репозиторий](https://github.com/kubernetes-csi/csi-driver-host-path)
-Установку hostpath CSI driver выполним в соответствии с [мануалом](https://github.com/kubernetes-csi/csi-driver-host-path/blob/master/docs/deploy-1.17-and-later.md)
+Для выполнения основного ДЗ, склонируем [репозиторий](https://github.com/kubernetes-csi/csi-driver-host-path).  
+Установку hostpath CSI driver выполним в соответствии с [мануалом](https://github.com/kubernetes-csi/csi-driver-host-path/blob/master/docs/deploy-1.17-and-later.md).  
 
 ### Проверим, что все развернулось 
 `kubectl get po csi-hostpathplugin-0 -o=jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}'`
