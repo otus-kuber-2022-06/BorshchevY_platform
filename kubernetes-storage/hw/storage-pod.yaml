@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: csi-hostpath-test
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+      - mountPath: "/data"
+        name: csi-hostpath-volume
+  volumes:
+    - name: csi-hostpath-volume
+      persistentVolumeClaim:
+        claimName: pvc-hostpath
